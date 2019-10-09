@@ -1,0 +1,275 @@
+---
+title: "Les fonctions"
+subtitle: "Science des données V : recherche reproductible"
+output: github_document
+---
+
+### Objectifs
+
+- Appréhender les notions liées aux fonctions 
+
+- Apprendre à écrire des fonctions
+
+- Apprendre à documenter une fonction 
+
+### Organisation du dépôt 
+
+Ce dépot est directement lié au dépôt suivant <TODO> qui vous propose des notions théoriques sur l'utilisation, l'écriture et la documentation d'une fonction.
+
+Ce dépot comprend :
+
+- une fichier README.md qui reprend l'ensemble des exercices que vous devez réaliser afin de mener à bien ce travail.
+
+- un dossier R qui comprend l'ensemble des fonctions que vous devez réaliser/analyser au cours de ce module
+
+- un dossier vignettes qui comprend la documentation liée à vos fonctions
+
+- un dossier notebook qui comprend vos notes personnelles sur ce module.
+
+
+### Introduction 
+
+Les fonctions sont, dans R, les briques de construction. Si vous répétez des blocs de codes plus de deux fois, il faut réaliser une fonction. Mais c'est quoi une fonction ? Vous en utilisez en permanence dans R. Nous allons progressivement réaliser nos propres fonctions étape par étape. 
+
+L'utilisation de fonctions a plusieurs avantages 
+
+- On évite de répéter des blocs de codes plusieurs fois
+
+- On limite les possibilités de bug
+
+- On rend notre code plus lisible 
+
+- ...
+
+
+### Structure d'une fonction
+
+Une fonction se présente comme ci dessous :
+
+```
+my_function(arg1, arg2)
+```
+
+La fonction porte un nom suivi de parenthèse. A l'intérieur des parenthèses, on retrouve les arguments de la fonction 
+
+### Ecriture d'une fonction
+
+L'écriture d'une fonction respecte les conventions ci-dessous : 
+
+```
+my_function <- function(arg1, arg2){
+  # Mon bloc de code répété
+} 
+```
+
+Dans le dossier R, vous trouvez le script que se nomme `amount.R`.
+
+> Analisez une fonction qui permet de réaliser la somme de 2 termes. Ajoutez vos analyse au sein de votre fichier personnel ``fonction_note.Rmd.` 
+
+#### Exemples
+
+Prenons le cas par exemple de la fonction sd() qui permet de calculer l'écart-type d'un échantillon. La fonction sd() ne respecte par exemple pas la règle des fonctions se nomme avec un verbe.  On peut également retrouver des noms d'arguments communs comme `na.rm` pour spécifier la présence de valeurs manquantes (on retrouve cet argument dans de nombreuses fonctions). 
+
+```
+vec <- 1:10
+sd(x = vec, na.rm = FALSE)
+```
+
+Pour le plaisir de se rapeller la formule mathématique, l'écart-type s'obtient de la manière suivante :
+
+$$s_x = \sqrt{\sum_{i=1}^n{\frac{(x_i - \bar{x})^2}{n-1}}}$$
+
+Notons que $s^2$ est également appelée la **variance** de l'échantilon^[L'équation proposée est, en fait, valable pour un échantillon, et est calculé comme tel par R à l'aide des fonctions `sd()` pour l'écart type ou `var()` pour la variance.
+
+#### Exercice : cv()
+
+> Dans le dossier R, réalisez une fonction permettant de calculer le coefficient de variation d'un vecteur de nombre en pourcent. Le script R est préparé pour vous. Vous n'avez plus qu'à le compléter.
+
+Si jamais tu as oublié, la formule qui permet de calculer le coefficient de variation d'un échantillon est la suivante :
+
+$$CV (\%) = \frac{s_x}{\bar{x}} \ \times 100$$
+
+#### Exercice  : rescale01()
+
+> Dans le dossier R, réalisez une fonction permettant de redimensionner un vecteur entre 0 et 1. Inspirez vous des fonctions présentées précédement. Le script R est préparé pour vous. Vous n'avez plus qu'à le compléter.
+
+La formule mathématique qui permet de réaliser cette fonction est la suivante :
+
+$$x_{redim} = \frac{(x - valeur \ minimum \ de \ x)}{( valeur \ maximum \ de \ x -  valeur \ minimum \ de \ x)}$$
+
+### Documentation d'une fonction
+
+La documentation d'une fonction est une étape souvent négligée. Cependant, une fonction bien documentée est une fonction qui sera employée à l'avenir. Les fonctions mal documentées sont des fonctions qui seront généralement peu employées, souvent mal employées et enfin oubliées.
+
+Nous avons pu observer que les fonctions sont documentées au sein de nos différents scripts R avec un système de balisage particulier qu'il est indispensable de respecter. Ces conventions de documentation sont indispensables lorsque l'on souhaite regrouper diverses fonctions au sein d'un package. Malheureusement, nous n'aborderons pas les notions de package au sein de ce module.
+
+La documentation des fonctions reste néanmoins assez sommaire comme vous pouvez le voir avec les exemples ci-dessous :
+
+```
+?sd()
+
+?dplyr::filter()
+```
+
+Afin de proposer une documentation plus détaillée, l'utilisation des vignettes s'est répandue. La fonction vignette() permet de prendre connaissance des vignettes disponibles au sein d'un package 
+
+```
+# Pour prendre connaissance des vignettes disponible dans un package
+vignette(package = 'dplyr')
+
+# Visualiser une vignette particulière
+vignette("dplyr", package = 'dplyr')
+``` 
+
+Une bonne pratique est de réaliser une vignette pour décrire l'objectif de la fonction, puis les différentes étapes qui mène à l'écriture de cette fonction et enfin d'y ajouter plusieurs exemples mis en contexte. Lorsque votre fonction est décrite et écrite et testée, il est temps de la placer dans un script R. Attention, l'écriture d'une vignette ne dispense pas d'écrire la documentation de manière synthétisée dans le script.
+
+#### Exemple
+
+Prenons le cas par exemple de la fonction skeleton_weight() qui est documentée dans le fichier `skeleton_weight_french.Rmd`.
+
+> Dans le dossier vignettes, analysez la structure du document `skeleton_weight_french.Rmd`. Ajoutez vos analyses et remarques au sein de votre fichier personnel `fonction_note.Rmd`. Dans le dossier R, analysez ensite la fonction skeleton_weight() dans le fichier `skeleton_weight.R`.
+
+#### Exercice : reg_lin()
+
+La fonction reg_lin() a pour objectif de calculer une valeur y qui suit une regression linéaire simple en partant d'une valeur x, d'une valeur de pente et d'une valeur d'ordonnée à l'origine. Nous pouvons donc écrire l'équation de notre régression linéaire simple.
+
+$$y  =  a \times x + b$$
+
+Avec a comme pente et b comme ordonnée à l'origine.
+
+
+> Dans le dossier vignettes, un début de vignette a été réalisé afin de vous permettre de réaliser et documenter la fonction reg_lin(). Une fois, la fonction documentée et réalisée, ajoutez votre fonction dans un script reg_lin.R
+
+### Excécution conditionnelle
+
+Lors de la réalisation de vos fonctions,  vous serez amené à exécuter du code de manière conditionnelle
+
+```
+if (condition) {
+  # Code exécuté si la condition est vérifiée
+} else {
+  # code exécuté si la condition es infirmée
+}
+```
+
+Une page d'aide est dédiée à l'utilisation des if
+
+```
+?`if`
+```
+
+Il est bien sur possible de réaliser des conditons multiples
+
+```
+if (condition) {
+  # Code exécuté si la condition est vérifié
+} else if(condition) {
+  # Autre code a éxécuter si la condition est vérifié
+} else {
+  # code ...
+}
+```
+
+#### Exercice  : `trimester()`
+
+La fonction trimester() a pour objectif de convertir un vecteur de mois en un vecteur de trimestre.
+
+| Mois      | Mois (numérique) | Trimestre |
+| --------- | ---------------- | --------- |
+| janvier   | 1                | 1         |
+| février   | 2                | 1         |
+| mars      | 3                | 1         |
+| avril     | 4                | 2         |
+| mai       | 5                | 2         |
+| juin      | 6                | 2         |
+| juillet   | 7                | 3         |
+| aout      | 8                | 3         |
+| septembre | 9                | 3         |
+| octobre   | 10               | 4         |
+| novembre  | 11               | 4         |
+| décembre  | 12               | 4         |
+
+
+> Dans le dossier vignettes, un début de vignette a été réalisé afin de vous permettre de réaliser et documenter la fonction trimester(). Une fois, la fonction documentée et réalisée, ajoutez votre fonction dans un script trimester.R
+
+#### Exercice : `real_feel()`
+
+La fonction real_feel() a pour objectif de convertir un vecteur de température en un vecteur de température ressentie.
+
+| Température | Température ressentie |
+| ----------- | --------------------- |
+| <= 0        | glacial               |
+| <= 10       | froid                 |
+| <= 20       | frais                 |
+| <=30        | chuad                 |
+| > 30        | torride               |
+
+
+> Dans le dossier vignettes, un début de vignette a été réalisé afin de vous permettre de réaliser et documenter la fonction real_feel(). Une fois, la fonction documentée et réalisée, ajoutez votre fonction dans un script real_feel.R
+
+#### Exercice  : `fizzbuzz()`
+
+La fonction fizzbuzz a pour objectif de convertir un vecteur d'entier positif en un vecteur de caractères
+
+- Si l'entier est divisible par 3 : `fizz`
+
+- Si l'entier est divisible par 5 : `buzz`
+
+- Si l'entier est divisible par 3 et par 5 : `fizzbuzz`
+
+- Si la valeur n'est ni divisisble par 3 ou par 5 : `ND`
+
+> Dans le dossier vignettes, un début de vignette a été réalisé afin de vous permettre de réaliser et documenter la fonction fizzbuzz(). Une fois, la fonction documentée et réalisée, ajoutez votre fonction dans un script fizzbuzz.R
+
+### Tester une fonction
+
+Nous avons réalisé différentes fonctions cv(), rescale01(), trimester(), real_feel(), fizzbuzz(). Nous allons tester nos fonctions et tenter de penser à toutes les erreurs que l'on pourrait réaliser avec cette fonction. 
+
+Pour débuter notre réflexion, tetons d'exécuter la fonction cv() avec les vecteurs suivants :
+
+```
+# test 1
+vec <- c(rnorm(14), Inf)
+# test 2
+vec <- c(rnorm(14), NA)
+# test 3
+vec <- c(rnorm(14), "t")
+# test 4
+vec <- -4:5
+```
+
+Si la fonction ne nous renvoie pas la valeur, le message ou l'erreur attendue, il faut améliorer notre fonction à la suite de chaque test. à l'intérieur de notre fonction, il est possible d'intégrer des tests
+
+```
+if (condition)
+  stop("message d'erreur explicite")
+  
+# ou encore
+
+if(condition)
+  warning("message explicite")
+```
+
+Par exemple si l'on souhaite ajouter un test qui vérifie que notre vecteur ne comprend que des valeur numérique, on peut ajouter un test de ce type
+
+```
+if (!is.numeric(x))
+  stop("x must be numeric")
+```
+
+
+> Testez vos différentes fonctions et adaptez-les ci-cela est nécessaire
+
+La programmation défénsive a pour but d'arreter le plus vite possible une fonction lors de la présence d'une erreur avec un message explicite. Le package `testthat` permet de tester vos fonctions avec des fonctions comme `expect_equal()` ou encore `expect_error()`. N'hésitez pas à ajouter ce fonction de test dans votre vignettes par exemple.
+
+### Optimiser une fonction
+
+Nos différentes fonctions sont écrites, documentée et testée. Nous avons donc atteint une étape importante dans la création de fonction. On peut néanmoins se poser les questions suivantes : 
+
+- Est ce que ma fonction est optimisée ?
+
+- N'existe t'il pas une autre manière d'écrire notre fonction afin qu'elle soit plus lisible ?
+
+- N'existe t'il pas une autre manière d'écrire notre fonction afin qu'elle soit éxécutée plus rapidement ?
+
+> Essayer d'optimiser vos fonctions en débutant par la fonction trimester(). Afin de réaliser vos comparaison de fonction, utilisez la fonction `bench::mark()`
