@@ -1,0 +1,14 @@
+---
+title: 'SDD V :  les fonctions'
+subtitle: "Notes personnelles"
+author: '....'
+date: "../../20.."
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+```
+
+## R Markdown
+

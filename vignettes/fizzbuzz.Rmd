@@ -1,0 +1,29 @@
+---
+title: "fizzbuzz"
+author: "..."
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+# Introduction
+
+(Introduire votre fonction)
+
+# Fonction
+
+(Rédiger votre bloc de code afin de répondre à la question)
+
+(Transformer votre bloc de code en fonction afin de répondre à la question)
+
+# Exemples
+
+(au moins 3 exemples)
